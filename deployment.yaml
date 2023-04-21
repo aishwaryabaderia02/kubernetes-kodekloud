@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    tier: frontent
+    app: nginx
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+        type: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 1
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+    
+
+# commands
+
+# kubectl create -f filename --recotd
+# kubectl get deployment deploymentname
+# kubectl edit deployment deploymentname
+# kubectl set image deployment deplomentname --image=image <--nginx=nginx:1.18>
+# kubectl apply -f deplomentname
+# kubectl rollout status deploymentname
+# kubectl rollout history deploymentname
+# kubectl rollout undo deploymentname
