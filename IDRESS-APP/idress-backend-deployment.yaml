@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idress-deploy
+  labels:
+    name: idress-backend-deploy
+    app: idress-backend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: idress-backend-pod
+      app: idress-backend-app
+  template:
+    containers:
+    - name: idress-backend
+      image: aishwaryabaderia/idress:backend
+      ports:
+        - containerPort: 3000
